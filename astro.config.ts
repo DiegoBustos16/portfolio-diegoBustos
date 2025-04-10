@@ -19,11 +19,11 @@ export default defineConfig({
     mdx(),
     sitemap(),
     spectre({
-      name: 'Spectre',
+      name: 'Diego Bustos',
       openGraph: {
         home: {
-          title: 'Spectre',
-          description: 'A minimalistic theme for Astro.'
+          title: 'Diego Bustos Portfolio',
+          description: 'Diego Bustos - Portfolio'
         },
         blog: {
           title: 'Blog',

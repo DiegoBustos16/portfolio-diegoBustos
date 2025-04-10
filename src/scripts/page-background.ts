@@ -3,19 +3,23 @@ import { AstroError } from "astro/errors";
 interface LetterPosition {
   x: number;
   y: number;
-  letter: string;
+  word: string;
 }
 
-interface LetterInstance extends LetterPosition {
+interface LetterInstance {
+  x: number;
+  y: number;
+  word: string;
   timestamp: number;
   fadeout: number;
 }
+
 
 /**
  * PageBackground class
  */
 class PageBackground {
-  private LETTER_FADE_DURATION: [number, number] = [2, 7]; // Seconds
+  private LETTER_FADE_DURATION: [number, number] = [4, 7]; // Seconds
 
   private baseCanvas: HTMLCanvasElement;
   private overlayCanvas: HTMLCanvasElement;
@@ -36,6 +40,17 @@ class PageBackground {
 
   private primaryRgb: string;
 
+  private TECH_SKILLS: string[] = [
+    "Java",
+    "Spring",
+    "PostgreSQL",
+    "Node",
+    "React",
+    "Docker",
+    "Eureka",
+    "Swagger"
+  ];
+  
   /**
    * Initializes the background on the page.
    * @param baseCanvas - The base canvas element. Used for static letters.
@@ -74,7 +89,7 @@ class PageBackground {
    * Sets up the background canvases. The text is decided based on the title of the page.
    */
   private initBackground = () => {
-    let text: string = document.title.toLowerCase().split(' | ')[0].replace(/\s/g, '_') || 'spectre';
+    let text = this.TECH_SKILLS[Math.floor(Math.random() * this.TECH_SKILLS.length)];
 
     // Add additional underscore to separate words
     if (text.includes("_")) {
@@ -86,26 +101,30 @@ class PageBackground {
     const lines = Math.ceil(this.height / 35);
   
     // Loop through the canvas and draw the text
-    for(let i = 0; i < lines; i++) {
-      for(let j = 0; j < letters; j++) {
+    const maxPerLine = Math.floor(this.width / 150); // Espacio para palabras enteras
+    const totalLines = Math.floor(this.height / 50); // Espacio vertical
+
+    for (let i = 0; i < totalLines; i++) {
+      for (let j = 0; j < maxPerLine; j++) {
+        const word = this.TECH_SKILLS[Math.floor(Math.random() * this.TECH_SKILLS.length)];
+        const x = j * 150 + Math.random() * 20; // Glitch horizontal
+        const y = i * 50 + Math.random() * 10;  // Glitch vertical
+
         this.baseCtx.font = '28px Geist Mono';
         this.baseCtx.textAlign = 'start';
         this.baseCtx.textBaseline = 'top';
         this.baseCtx.fillStyle = 'rgba(255, 255, 255, 0.01)';
-        this.baseCtx.fillText(text[j % text.length], j * 17, i * 35);
-      
-        this.letterPositions.push({
-          x: j * 17,
-          y: i * 35,
-          letter: text[j % text.length]
-        });
+        this.baseCtx.fillText(word, x, y);
+
+        this.letterPositions.push({ x, y, word });
       }
     }
+
   
     // Randomly select 75% of the letters to animate
     const randomLetters = this.getRandomAmountFromArray<LetterPosition>(
       this.letterPositions,
-      Number.parseInt((lines * 0.75).toFixed())
+      Number.parseInt((lines * 0.35).toFixed())
     );
   
     // Draw the letters on the overlay canvas
@@ -116,7 +135,7 @@ class PageBackground {
       this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, 0)`;
       this.overlayCtx.shadowBlur = 16;
       this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, 0)`;
-      this.overlayCtx.fillText(letter.letter, letter.x, letter.y);
+      this.overlayCtx.fillText(letter.word, letter.x, letter.y);
   
       // Some number between LETTER_FADE_DURATION[0] and LETTER_FADE_DURATION[1] (in seconds)
       const animLength = this.LETTER_FADE_DURATION[0] + Math.random() * (this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0]);
@@ -124,7 +143,7 @@ class PageBackground {
       this.letterInstances.push({
         x: letter.x,
         y: letter.y,
-        letter: letter.letter,
+        word: letter.word,
         timestamp: Date.now(),
         fadeout: Date.now() + animLength * 1000
       });
@@ -206,7 +225,7 @@ class PageBackground {
         this.letterInstances.push({
           x: randomLetter[0].x,
           y: randomLetter[0].y,
-          letter: randomLetter[0].letter,
+          word: randomLetter[0].word,
           timestamp: Date.now(),
           fadeout: Date.now() + (this.LETTER_FADE_DURATION[0] + Math.random() * (this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0])) * 1000
         });
@@ -216,9 +235,16 @@ class PageBackground {
       this.overlayCtx.textAlign = 'start';
       this.overlayCtx.textBaseline = 'top';
       this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, ${alpha})`;
-      this.overlayCtx.shadowBlur = 16;
+      this.overlayCtx.shadowBlur = 25;
       this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, ${alpha})`;
-      this.overlayCtx.fillText(letter.letter, letter.x, letter.y);
+
+      if (Math.random() < 0.03) {
+        this.overlayCtx.shadowBlur = 25 + Math.random() * 10;
+      } else {
+        this.overlayCtx.shadowBlur = 16;
+      }
+
+      this.overlayCtx.fillText(letter.word, letter.x, letter.y);
     }
     
     requestAnimationFrame(this.redrawBackground);
