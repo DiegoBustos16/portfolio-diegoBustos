@@ -110,12 +110,11 @@ class PageBackground {
         const x = j * 150 + Math.random() * 20; // Glitch horizontal
         const y = i * 50 + Math.random() * 10;  // Glitch vertical
 
-        this.baseCtx.font = '28px Geist Mono';
+        this.baseCtx.font = '16px Geist Mono';
         this.baseCtx.textAlign = 'start';
         this.baseCtx.textBaseline = 'top';
-        this.baseCtx.fillStyle = 'rgba(255, 255, 255, 0.01)';
-        this.baseCtx.fillText(word, x, y);
-
+        this.baseCtx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+        this.baseCtx.fillText(word, x, y);        
         this.letterPositions.push({ x, y, word });
       }
     }
@@ -129,14 +128,14 @@ class PageBackground {
   
     // Draw the letters on the overlay canvas
     for(const letter of randomLetters) {
-      this.overlayCtx.font = 'bold 28px Geist Mono';
+      this.overlayCtx.font = 'bold 16px Geist Mono';
       this.overlayCtx.textAlign = 'start';
       this.overlayCtx.textBaseline = 'top';
       this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, 0)`;
       this.overlayCtx.shadowBlur = 16;
       this.overlayCtx.shadowColor = `rgba(${this.primaryRgb}, 0)`;
       this.overlayCtx.fillText(letter.word, letter.x, letter.y);
-  
+
       // Some number between LETTER_FADE_DURATION[0] and LETTER_FADE_DURATION[1] (in seconds)
       const animLength = this.LETTER_FADE_DURATION[0] + Math.random() * (this.LETTER_FADE_DURATION[1] - this.LETTER_FADE_DURATION[0]);
   
@@ -148,7 +147,6 @@ class PageBackground {
         fadeout: Date.now() + animLength * 1000
       });
     }
-  
     // Make the base canvas visible
     this.baseCanvas.style.opacity = '1';
   }
@@ -231,7 +229,7 @@ class PageBackground {
         });
       }
       
-      this.overlayCtx.font = 'bold 28px Geist Mono';
+      this.overlayCtx.font = 'bold 16px Geist Mono';
       this.overlayCtx.textAlign = 'start';
       this.overlayCtx.textBaseline = 'top';
       this.overlayCtx.fillStyle = `rgba(${this.primaryRgb}, ${alpha})`;

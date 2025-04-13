@@ -5,12 +5,13 @@ import ProfilePicture from '../assets/pfp.png';
 
 import Card from '../components/Card.astro';
 import Layout from '../layouts/Layout.astro';
-import ImageGlow from '../components/ImageGlow.astro';
+import TooltipIcon from '../components/TooltipIcon.astro';
 import Icon from '../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { name, openGraph } from 'spectre:globals';
+import Hero from '../components/Hero.astro';
 
 const [posts, projects, about, workExperience, quickInfo, socials] = await Promise.all([
 	getCollection('posts', (post) => post.data.draft !== true),
@@ -30,25 +31,52 @@ const { Content: About } = await render(about!);
 	description={openGraph.home.description}
 	pagefindIgnore
 >
+<Hero slot="hero" quickInfo={quickInfo} />
 	<div class="layout-grid-left" slot="left">
 		<Card class="flex-col-card">
-			<ImageGlow quality={100} width={80} height={80} src={ProfilePicture} alt="Louis looking out of a window" loading='eager' />
-			<h2>{name}</h2>
+			<h2 class="no-mt">Tech Stack</h2>
 			<ul class="overview-list">
-				{quickInfo.map((info) => (
-					<li>
-						<Icon type={info.data.icon.type} name={info.data.icon.name as any} width={24} height={24} class='glow-icon' />
-						<span>{info.data.text}</span>
-					</li>
-				))}
+			  <li>
+				<Icon type="simple-icons" name="openjdk" width={24} height={24} class="glow-icon" />
+				<span>Java</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="spring" width={24} height={24} class="glow-icon" />
+				<span>Spring Boot</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="nodedotjs" width={24} height={24} class="glow-icon" />
+				<span>Node.js</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="react" width={24} height={24} class="glow-icon" />
+				<span>React</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="postgresql" width={24} height={24} class="glow-icon" />
+				<span>PostgreSQL</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="mongodb" width={24} height={24} class="glow-icon" />
+				<span>MongoDB</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="docker" width={24} height={24} class="glow-icon" />
+				<span>Docker</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="swagger" width={24} height={24} class="glow-icon" />
+				<span>Swagger</span>
+			  </li>
 			</ul>
-		</Card>
+		  </Card>
+		  
 		<Card>
 			<h3 class="no-mt">Socials</h3>
 			<ul class="overview-list">
 				{socials.map((item) => (
 					<li>
-						<a href={item.data.link} class="socials-link">
+						<a href={item.data.link} class="socials-link" target="_blank">
 							<Icon type={item.data.icon.type} name={item.data.icon.name as any} width={24} height={24} class='glow-icon' />
 							<span>{item.data.text}</span>
 						</a>
@@ -69,23 +97,6 @@ const { Content: About } = await render(about!);
 		</Card>
 		<Card>
 			<div class="header-container">
-				<Icon type='lucide' name="rss" width={24} height={24} class='glow-icon' />
-				<h2>Latest Posts</h2>
-			</div>
-			<div class="content-container">
-				{posts.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime()).slice(0, 2).map((post) => (
-					<a href={`/blog/${post.id}`} class="post-container">
-						<div class="post-header">
-							<h3>{post.data.title}</h3>
-							<span class="post-date">{post.data.createdAt.toLocaleDateString()}</span>
-						</div>
-						<span>{post.data.description}</span>
-					</a>
-				))}
-			</div>
-		</Card>
-		<Card>
-			<div class="header-container">
 				<Icon type='lucide' name="folder-git" width={24} height={24} class='glow-icon' />
 				<h2>Latest Projects</h2>
 			</div>
@@ -97,6 +108,16 @@ const { Content: About } = await render(about!);
 							<span class="post-date">{project.data.date.toLocaleDateString()}</span>
 						</div>
 						<span>{project.data.description}</span>
+						{project.data.techs && (
+						<div class="tech-stack">
+							<strong>Techs:</strong>
+							<div class="tech-icons">
+							{project.data.techs.map((tech) => (
+								<TooltipIcon icon={tech.icon} label={tech.name} width={24} height={24} class='glow-icon'/>
+								))}
+							</div>
+						</div>
+						)}
 					</a>
 				))}
 			</div>

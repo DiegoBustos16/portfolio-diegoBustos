@@ -19,7 +19,7 @@ export default defineConfig({
     mdx(),
     sitemap(),
     spectre({
-      name: 'Diego Bustos',
+      name: 'Portfolio',
       openGraph: {
         home: {
           title: 'Diego Bustos Portfolio',

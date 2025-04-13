@@ -64,6 +64,7 @@ const { title, description, image, pagefindIgnore, article } = Astro.props;
 	<body>
 		<main data-pagefind-ignore={pagefindIgnore}>
 			<Navbar />
+			<slot name="hero" />
 			<LayoutGrid>
 				<slot name="left" slot="left" />
 				<slot name="right" slot="right" />

@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+	icon: {
+		type: 'lucide' | 'simple-icons';
+		name: string;
+	};
+	label: string;
+	width?: number;
+	height?: number;
+	[key: string]: any;
+}
+
+const { icon, label, width = 20, height = 20, ...rest } = Astro.props;
+---
+<div class="tooltip-icon">
+	<Icon type={icon.type} name={icon.name as any} width={width} height={height} {...rest} />
+	<span class="tooltip-text">{label}</span>
+</div>
+
+<style>
+.tooltip-icon {
+	position: relative;
+	display: inline-block;
+	margin-top: 1rem;
+	margin-right: 0.3rem;
+}
+
+.tooltip-text {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	background-color: #111;
+	color: white;
+	font-size: 0.75rem;
+	padding: 4px 8px;
+	border-radius: 4px;
+	position: absolute;
+	z-index: 10;
+	bottom: 125%;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-icon:hover .tooltip-text {
+	visibility: visible;
+	opacity: 1;
+}
+</style>

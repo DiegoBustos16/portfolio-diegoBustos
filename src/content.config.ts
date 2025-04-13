@@ -71,20 +71,30 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ base: "src/content/projects", pattern: "**/*.{md,mdx}" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    image: image(),
-    link: z.string().url().optional(),
-    info: z.array(
-      z.object({
-        text: z.string(),
-        icon: z.union([lucideIconSchema, simpleIconSchema]),
-        link: z.string().url().optional(),
-      })
-    )
-  })
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.coerce.date(),
+      image: image(),
+      link: z.string().url().optional(),
+      info: z.array(
+        z.object({
+          text: z.string(),
+          icon: z.union([lucideIconSchema, simpleIconSchema]),
+          link: z.string().url().optional(),
+        })
+      ),
+      techs: z
+        .array(
+          z.object({
+            name: z.string(),
+            icon: z.union([lucideIconSchema, simpleIconSchema]),
+          })
+        )
+        .optional(),
+    }),
 });
+
 
 export const collections = { tags, posts, projects, other, quickInfo, socials, workExperience };
