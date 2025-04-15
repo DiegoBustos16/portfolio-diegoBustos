@@ -11,7 +11,7 @@ import { spectreDark } from './src/ec-theme';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://diegobustos16.github.io',
-  base: 'portfolio-diegoBustos',
+  base: '/portfolio-diegoBustos/',
   output: 'static',
   integrations: [
     expressiveCode({
