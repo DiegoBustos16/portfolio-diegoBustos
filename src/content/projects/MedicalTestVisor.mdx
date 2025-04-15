@@ -1,10 +1,11 @@
 ---
+
 title: Medical Test Manager
 date: 02-09-2025
 description: A web-based platform for managing medical studies and diagnostic test results, built with Spring Boot and React.
-image: ../assets/spectre.png
+image: /img/mtv-header.png
 techs:
-  - name: Spring Boot
+  - name: Spring
     icon:
       type: simple-icons
       name: spring  
@@ -40,31 +41,31 @@ info:
       name: github
 ---
 
-Medical Test Manager is a fullstack web application for organizing and accessing medical test records in a clinical environment.
+import Lightbox from '../../components/Lightbox.astro';
 
-It was built to simulate real-world backend architecture and microservice communication.
+## Overview
+
+Medical Test Manager is a full-stack distributed system that enables storage, management, and secure access to medical test data such as patient records, hospitals, doctors, and test results (including DICOM-like imaging). Built on a microservices architecture, it ensures modularity, scalability, and ease of maintenance.
+
+It includes:
+- Role-based secure access via Keycloak
+- Microservices for core domains (patients, doctors, hospitals, tests)
+- RESTful APIs with Swagger/OpenAPI integration
+- Centralized configuration and service discovery
+
 ## Features
 
-- Secure user management with Keycloak
-- Microservice architecture using Spring Boot
-- RESTful APIs secured with JWT
-- Data persistence with PostgreSQL and MongoDB
-- Dockerized environment with docker-compose
-- Real-time communication with Kafka
-- Doctor, Hospital and patient roles
-- Modular and scalable codebase
+- Secure microservices with OAuth2/JWT-based authentication
+- CRUD operations for Patients, Doctors, Hospitals, and Medical Tests
+- Amazon S3 integration for uploading and retrieving medical images/files
+- Docker-based deployment
+- OpenAPI (Swagger UI) documentation
+- Modular architecture following clean code principles
+- Integrated unit testing across services
 
-## Lighthouse
+## Diagram
 
-Spectre scores 100 Points on every Lighthouse benchmark (Performance, Accessibility, Best Practices, SEO):
+<Lightbox src="/img/diagram.png" alt="Project Diagram">
+</Lightbox>
 
-![A picture showing a 100/100 Lighthouse score on all tests](/img/lighthouse.png)
-
-## Speedy
-
-Spectre uses no additional frameworks, not even Tailwind. This results in incredibly fast load and build times.
-
-## Configurable
-
-Spectre's unique features can all be turned on or off and even modified. If you, for example, dislike the comments, you can disable them with ease.
 

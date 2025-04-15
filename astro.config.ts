@@ -30,7 +30,7 @@ export default defineConfig({
           description: 'News and guides for Spectre.'
         },
         projects: {
-          title: 'Projects'
+          title: 'Diego Bustos Projects'
         }
       },
       giscus: {

@@ -1,0 +1,11 @@
+---
+const { src, alt, children } = Astro.props;
+---
+
+<div class="lightbox-wrapper">
+  <img src={src} alt={alt} class="lightbox-thumbnail" onclick="document.getElementById('lightbox')?.classList.add('active')" />
+  <div id="lightbox" class="lightbox-container" onclick="document.getElementById('lightbox')?.classList.remove('active')">
+    <img src={src} alt={alt} class="lightbox-image" />
+    <figcaption>{children}</figcaption>
+  </div>
+</div>
