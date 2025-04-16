@@ -21,7 +21,7 @@ const { quickInfo } = Astro.props as { quickInfo: QuickInfoItem[] };
       <h1 class="glitch-text">Diego Bustos</h1>
 
       <p class="hero-subtitle">
-        <span class="glow-word">Fullstack</span> Developer <span class="glow-word dot">•</span> Backend oriented
+        <span class="glow-word">Fullstack</span><span class="mobile-hidden"><br></span> Software Engenieer
       </p>
 
       <div class="quick-info-list">
@@ -118,13 +118,17 @@ const { quickInfo } = Astro.props as { quickInfo: QuickInfoItem[] };
   opacity: 0.8;
 }
 
+.mobile-hidden {
+    display: none;
+  }
+  
 @media screen and (max-width: 640px) {
   .glitch-text {
     font-size: 2rem;
   }
 
-  .dot {
-    display: none;
+  .mobile-hidden {
+    display: inline;
   }
   
   .hero-container {
