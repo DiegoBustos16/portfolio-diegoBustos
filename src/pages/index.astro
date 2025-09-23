@@ -42,11 +42,7 @@ const { Content: About } = await render(about!);
 			  </li>
 			  <li>
 				<Icon type="simple-icons" name="spring" width={24} height={24} class="glow-icon" />
-				<span>Spring Framework</span>
-			  </li>
-			  <li>
-				<Icon type="simple-icons" name="nodedotjs" width={24} height={24} class="glow-icon" />
-				<span>Node.js</span>
+				<span>Spring Boot</span>
 			  </li>
 			  <li>
 				<Icon type="simple-icons" name="react" width={24} height={24} class="glow-icon" />
@@ -131,8 +127,8 @@ const { Content: About } = await render(about!);
 				{workExperience.map((entry) => (
 					<div class="work-experience-entry">
 						<span class="work-experience-duration">{entry.data.duration}</span>
-						<h3 class="work-experience-company">{entry.data.company}</h3>
-						<span class="work-experience-role">{entry.data.title}</span>
+						<h3 class="work-experience-role">{entry.data.title}</h3>
+						<span class="work-experience-company">{entry.data.company}</span>
 						<p  class="work-experience-desc" set:html={entry.data.description.replace(/\n/g, "<br>")}></p>
 					</div>
 				))}

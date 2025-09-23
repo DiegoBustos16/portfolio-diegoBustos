@@ -3,15 +3,15 @@
     "id": 1,
     "duration": "April 2023 - June 2024",
     "company": "MD TECH",
-    "title": "Freelance Frontend Developer (Project-based)",
-    "description": "• Collaborated on the development of two responsive landing pages for commercial clients, focusing on clean UI and performance.\n     • Participated in client meetings to gather requirements and deliver tailored web solutions aligned with their branding and goals.\n      • Built user interfaces using HTML, CSS, JavaScript, and React, ensuring cross-device compatibility."
+    "title": "Jr. Frontend Developer",
+    "description": "Contributed to the development of two Single Page Application (SPA) websites using React and Tailwind CSS, ensuring responsive design and an optimized user experience. Collaborated with clients to gather requirements and understand their needs, ensuring the implemented solutions met their expectations."
   }
   ,
   {
     "id": 2,
     "duration": "February 2023 - March 2024",
     "company": "TESTA INOX. ",
-    "title": "FullStack Developer & IT Lead",
-    "description": "• Led the redesign of CNC machinery firmware built with C, resulting in a 20% increase in processing speed.\n     •Implemented the company website utilizing React and optimized for performance using Redux, transferring clear and structured design requirements.\n     • Developed a robust project management tool utilizing Express and React, boosting project tracking efficiency by 30%."
+    "title": "Jr. FullStack Developer",
+    "description": "I was fully responsible for the design and development of an internal project management system using Spring Boot, React, and Tailwind CSS, which helped reduce project execution time by approximately 10%. Additionally, I provided IT support and maintained other internal systems. I also developed the company’s institutional website as a Single Page Application (SPA) using React and Tailwind CSS, implementing the design provided in Figma to deliver a modern and consistent user experience."
   }
 ]

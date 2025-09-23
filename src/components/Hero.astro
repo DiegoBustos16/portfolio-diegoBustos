@@ -160,9 +160,12 @@ const { quickInfo } = Astro.props as { quickInfo: QuickInfoItem[] };
     setTimeout(() => {
       glitchElement.classList.remove('glitch-active');
     }, 1500);
-  }
+  };
+
+  window.addEventListener("load", () => {
+      setTimeout(() => {
+      triggerGlitch();
+    }, 5000);
+  });
   
-  setInterval(() => {
-    triggerGlitch();
-  }, 10000);
 </script>
