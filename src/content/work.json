@@ -1,6 +1,13 @@
 [
   {
     "id": 1,
+    "duration": "April 2025 - Now",
+    "company": "Byron Tech Solutions",
+    "title": "Jr. Backend Developer",
+    "description": "Contribute to the development and maintenance of backend systems using Java and Spring Boot, integrating Mercado Pago and ARCA APIs. Optimize PostgreSQL queries and implement unit tests to ensure high-quality, reliable code, collaborating closely with a Scrum team through code reviews, sprint planning, and retrospectives."
+  },
+  {
+    "id": 2,
     "duration": "April 2023 - June 2024",
     "company": "MD TECH",
     "title": "Jr. Frontend Developer",
@@ -8,7 +15,7 @@
   }
   ,
   {
-    "id": 2,
+    "id": 3,
     "duration": "February 2023 - March 2024",
     "company": "TESTA INOX. ",
     "title": "Jr. FullStack Developer",
