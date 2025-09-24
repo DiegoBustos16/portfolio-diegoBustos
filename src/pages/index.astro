@@ -80,6 +80,51 @@ const { Content: About } = await render(about!);
 				))}
 			</ul>
 		</Card>
+
+		<Card>
+			<div class="header-container">
+				<Icon type='lucide' name="mail" width={24} height={24} class='glow-icon' />
+				<h3>Contact Me</h3>
+			</div>
+			<form class="contact-form" id="contact-form">
+				<div class="form-group">
+					<label for="from_name">Name</label>
+					<input 
+						type="text" 
+						id="from_name" 
+						name="from_name" 
+						required 
+						placeholder="Your name"
+						class="form-input"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="from_email">Email</label>
+					<input 
+						type="email" 
+						id="from_email" 
+						name="from_email" 
+						required 
+						placeholder="your.email@example.com"
+						class="form-input"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="message">Message</label>
+					<textarea 
+						id="message" 
+						name="message" 
+						required 
+						placeholder="Your message here..."
+						rows="4"
+						class="form-input form-textarea"
+					></textarea>
+				</div>
+				<button type="submit" class="form-submit-btn" id="submit-btn">
+					<span>Send Message</span>
+				</button>
+			</form>
+		</Card>
 	</div>
 	<div class="layout-grid-right" slot="right">
 		<Card>
@@ -166,4 +211,184 @@ const { Content: About } = await render(about!);
 .see-all-btn:hover {
 	background-color: var(--primary);
 }
+
+/* Contact Form Styles */
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-group label {
+	font-weight: 500;
+	color: white;
+	font-size: 0.9rem;
+}
+
+.form-input {
+	padding: 0.75rem;
+	background-color: #1a1a1a;
+	border: 1px solid #353535;
+	color: white;
+	font-size: 0.9rem;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.form-input::placeholder {
+	color: #666;
+}
+
+.form-textarea {
+	resize: vertical;
+	min-height: 100px;
+}
+
+.form-submit-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	background-color: transparent;
+	color: white;
+	border: 1px solid #353535;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-submit-btn:hover:not(:disabled) {
+	background-color: var(--primary);
+	border-color: var(--primary);
+}
+
+.form-submit-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+	animation: spin 1s linear infinite;
+}
+
+/* Success message */
+.success-message {
+	padding: 1rem;
+	background-color: #0f3f0f;
+	border: 1px solid #22c55e;
+	border-radius: 0.375rem;
+	color: #22c55e;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.error-message {
+	padding: 1rem;
+	background-color: #3f0f0f;
+	border: 1px solid #ef4444;
+	border-radius: 0.375rem;
+	color: #ef4444;
+	text-align: center;
+	margin-top: 1rem;
+}
+
 </style>
+
+<!-- EmailJS CDN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+
+	const form = document.getElementById('contact-form');
+	const submitBtn = document.getElementById('submit-btn');
+	
+	// Configuración de EmailJS desde variables de entorno
+	const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+	const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+
+	if (!SERVICE_ID || !TEMPLATE_ID) {
+		console.error('EmailJS credentials not configured. Please set environment variables.');
+		return;
+	}
+	
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		
+		// Cambiar botón a estado de carga
+		submitBtn.disabled = true;
+		submitBtn.innerHTML = `
+			<svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+				<path d="M21 12a9 9 0 11-6.219-8.56"/>
+			</svg>
+			<span>Sending...</span>
+		`;
+		
+		// Remover mensajes previos
+		const existingMessage = form.querySelector('.success-message, .error-message');
+		if (existingMessage) {
+			existingMessage.remove();
+		}
+		
+		try {
+			// Enviar email usando EmailJS
+			const result = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
+			
+			// Mostrar mensaje de éxito
+			const successMessage = document.createElement('div');
+			successMessage.className = 'success-message';
+			successMessage.innerHTML = 'Message sent successfully! I\'ll get back to you soon.';
+			form.appendChild(successMessage);
+			
+			// Cambiar botón a estado de éxito
+			submitBtn.innerHTML = `
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="20,6 9,17 4,12"/>
+				</svg>
+				<span>Sent!</span>
+			`;
+			
+			// Limpiar formulario
+			form.reset();
+			
+		} catch (error) {
+			
+			// Mostrar mensaje de error
+			const errorMessage = document.createElement('div');
+			errorMessage.className = 'error-message';
+			errorMessage.innerHTML = 'Failed to send message. Please try again or contact me directly.';
+			form.appendChild(errorMessage);
+			
+			// Cambiar botón a estado de error
+			submitBtn.innerHTML = `
+				<span>Error</span>
+			`;
+		}
+		
+		// Resetear botón después de 3 segundos
+		setTimeout(() => {
+			submitBtn.disabled = false;
+			submitBtn.innerHTML = `
+				<span>Send Message</span>
+			`;
+		}, 3000);
+	});
+});
+</script>
