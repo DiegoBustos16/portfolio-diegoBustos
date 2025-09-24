@@ -37,16 +37,16 @@ const { Content: About } = await render(about!);
 			<h2 class="no-mt">Tech Stack</h2>
 			<ul class="overview-list">
 			  <li>
-				<Icon type="simple-icons" name="openjdk" width={24} height={24} class="glow-icon" />
-				<span>Java</span>
-			  </li>
-			  <li>
 				<Icon type="simple-icons" name="spring" width={24} height={24} class="glow-icon" />
 				<span>Spring Boot</span>
 			  </li>
 			  <li>
 				<Icon type="simple-icons" name="react" width={24} height={24} class="glow-icon" />
 				<span>React</span>
+			  </li>
+			  <li>
+				<Icon type="simple-icons" name="tailwindcss" width={24} height={24} class="glow-icon" />
+				<span>Tailwind CSS</span>
 			  </li>
 			  <li>
 				<Icon type="simple-icons" name="postgresql" width={24} height={24} class="glow-icon" />
@@ -92,10 +92,13 @@ const { Content: About } = await render(about!);
 			</div>
 		</Card>
 		<Card>
-			<div class="header-container">
+			<div class="header-container projects-header">
+			<div class="left-items">
 				<Icon type='lucide' name="folder-git" width={24} height={24} class='glow-icon' />
 				<h2>Latest Projects</h2>
 			</div>
+			<a href="/projects" class="see-all-btn">View All Projects</a>
+	</div>
 			<div class="content-container">
 				{projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2).map((project) => (
 					<a href={`/projects/${project.id}`} class="post-container">
@@ -136,3 +139,31 @@ const { Content: About } = await render(about!);
 		</Card>
 	</div>
 </Layout>
+
+<style>
+
+.projects-header {
+	display: flex;
+	align-items: center;
+}
+
+.projects-header .left-items {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.see-all-btn {
+	margin-left: auto;
+	padding: 0.3rem 0.6rem;
+	color: white;
+	border: 1px solid #353535;
+	text-decoration: none;
+	font-weight: 500;
+	transition: background-color 0.2s;
+}
+
+.see-all-btn:hover {
+	background-color: var(--primary);
+}
+</style>
