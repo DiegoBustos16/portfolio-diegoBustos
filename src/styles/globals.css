@@ -256,6 +256,10 @@ main {
   }
 }
 
+.lightbox-screenshot-container {
+  margin-bottom: 1.5rem;
+}
+
 .hidden {
   display: none;
 }

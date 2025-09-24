@@ -1,0 +1,96 @@
+---
+title: My Task Planner
+date: 05-13-2025
+description: A full-stack task management platform with Spring Boot and Angular, enabling secure task planning.
+image: https://my-task-planner-bucket.s3.us-east-2.amazonaws.com/screenshot_main_page.png
+techs:
+  - name: Spring
+    icon:
+      type: simple-icons
+      name: spring  
+  - name: Angular
+    icon:
+      type: simple-icons
+      name: angular
+  - name: Tailwind CSS
+    icon:
+      type: simple-icons
+      name: tailwindcss
+  - name: Swagger
+    icon:
+      type: simple-icons
+      name: swagger
+  - name: PostgreSQL
+    icon:
+      type: simple-icons
+      name: postgresql
+  - name: JUnit 5
+    icon:
+      type: simple-icons
+      name: junit5
+  - name: Docker
+    icon:
+      type: simple-icons
+      name: docker
+  - name: GitHub
+    icon:
+      type: lucide
+      name: github
+info:
+  - text: Backend Repository
+    link: https://github.com/DiegoBustos16/my-task-planner-backend
+    icon:
+      type: lucide
+      name: github
+  - text: Frontend Repository
+    link: https://github.com/DiegoBustos16/my-task-planner-frontend
+    icon:
+      type: lucide
+      name: github
+---
+
+import Lightbox from '../../components/Lightbox.astro';
+
+## Overview
+
+**My Task Planner** is a full-stack web application designed to help users manage tasks, checklists, and personal productivity.  
+It is composed of two main components:  
+
+- **My Task Planner - Backend**: A Spring Boot–powered RESTful API that handles user authentication, task and sprint management, and data persistence. It exposes secure endpoints for clients to create, read, update, and delete tasks and related resources, following modern Java development best practices.  
+
+- **My Task Planner - Frontend**: An Angular-based single-page application that provides a clean and dynamic user interface. It allows users to authenticate, manage boards, and interact seamlessly with the backend API.  
+
+Together, these components form a robust, maintainable, and extensible task management platform.
+
+
+## Access the Application
+
+### Live Application
+- [Open My Task Planner](https://my-task-planner-frontend.vercel.app/)  
+### Swagger API Docs
+- [Open API / Swagger UI](https://my-task-planner-backend.onrender.com/swagger-ui/index.html)  
+
+## Features
+
+- Secure authentication and authorization
+- Task and checklist CRUD operations
+- Board management and task organization
+- RESTful API following clean code and layered architecture
+- Component-based Angular frontend
+- PostgreSQL for reliable data persistence
+- Docker-based deployment for easier portability
+- Integrated unit and integration testing
+
+## Documentation
+
+- [Frontend Deepwiki Documentation](https://deepwiki.com/DiegoBustos16/my-task-planner-frontend)  
+- [Backend Deepwiki Documentation](https://deepwiki.com/DiegoBustos16/my-task-planner-backend)
+
+## Some Screenshots
+<div class="lightbox-screenshot-container">
+<Lightbox src="https://my-task-planner-bucket.s3.us-east-2.amazonaws.com/screenshot_login.png" alt="Login Page Screenshot">
+</Lightbox></div>
+
+<div class="lightbox-screenshot-container">
+<Lightbox src="https://my-task-planner-bucket.s3.us-east-2.amazonaws.com/screenshot_tasks.png" alt="Board Page Screenshot">
+</Lightbox></div>
